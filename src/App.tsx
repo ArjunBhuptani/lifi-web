@@ -7,6 +7,7 @@ import './App.css';
 import logo from './assets/icon192.png';
 import AboutPage from './components/AboutPage';
 import Dashboard from './components/Dashboard';
+import Blog from './components/Blog';
 import NotFoundPage from './components/NotFoundPage';
 import Swap from './components/Swap';
 import Web3ConnectionManager from './components/web3/Web3ConnectionManager';
@@ -14,6 +15,7 @@ import WrappedWeb3ReactProvider from './components/web3/WrappedWeb3ReactProvider
 import analytics from './services/analytics';
 import setMetatags from './services/metatags';
 import { initStomt } from './services/stomt';
+import MakePost from './components/post/MakePost';
 
 function usePageViews() {
   const [path, setPath] = useState<string>()
@@ -56,6 +58,9 @@ function App() {
                 <Menu.Item key="/about">
                   <Link to="/about">About</Link>
                 </Menu.Item>
+                <Menu.Item key="/blog">
+                  <Link to="/blog">Blog</Link>
+                </Menu.Item>                
                 { false && <Menu.Item key="wallets" style={{float: "right"}}>
                   <Button shape="round" icon={<WalletOutlined />} >
                     Add Wallets
@@ -87,6 +92,16 @@ function App() {
                 initStomt('lifi')
                 return <AboutPage/>
               }}/>
+              <Route path="/blog" render={() => {
+                setMetatags({
+                  title: 'Li.Finance - Blog',
+                })
+                initStomt('lifi')
+                return <Blog/>
+              }}/>    
+               <Route path="/post/write" 
+                component={MakePost}
+              />         
               <Route path="*" render={() => {
                 setMetatags({
                   title: 'Li.Finance - Not Found',
