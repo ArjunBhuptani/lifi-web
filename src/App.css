@@ -23,13 +23,15 @@
   }
 }
 
+
+
 /* global styles */
 .site-layout {
   margin-top: 64px;
 }
 
 .site-layout .site-layout-background {
-  background: #fff;
+  background: rgb(255, 255, 255);
 }
 
 .ant-layout-header {
@@ -44,7 +46,7 @@
 
 .ant-menu-horizontal > .ant-menu-item a,
 .ant-menu-horizontal > .ant-menu-item-selected a {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .beta-badge {
@@ -55,7 +57,7 @@
   border-radius: 20px;
   line-height: 1;
   padding: 2px 4px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 12px;
 }
 

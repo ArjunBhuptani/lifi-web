@@ -1,23 +1,9 @@
 import { useEffect, useState } from 'react';
-
-async function getPost(slug: string) {
-	const res = await fetch(
-		`${BLOG_URL}/ghost/api/v3/content/posts/slug/${slug}?key=${CONTENT_API_KEY}&fields=title,slug,html`
-	).then((res) => res.json())
-
-	const posts = res.posts
-
-	return posts[0]
-}
-
-// Ghost CMS Request
+import { Link } from 'react-router-dom';
+import  './post.css';
 
 
-// hello-world - on first request = Ghost CMS call is made (1)
-// hello-world - on other requests ... = filesystem is called (1M)
-
-
-type Post = {
+interface Post {
     created_at: string;
     description: string;
     excerpt: string;
@@ -26,6 +12,9 @@ type Post = {
     feature_image: string;
 	slug: string;
   }
+
+
+
   var mainFeaturedPost = {
 	created_at: 'Title of a longer featured blog post',
 	description:
@@ -37,20 +26,7 @@ type Post = {
   };
   
 
-  
-  var featuredPosts = [
-	{
-	  title: 'Featured post',
-	  created_at: 'Nov 12',
-	  description:
-		'This is a wider card with supporting text below as a natural lead-in to additional content.',
-	  html: 'https://source.unsplash.com/random',
-	  excerpt: 'Image Text',
-	  feature_image: 'Image Text',
-  
-	}
-  ];
-  
+
     
   
   const BLOG_URL='https://li-finance-3.ghost.io'
@@ -78,13 +54,17 @@ type Post = {
 		  props: { posts }
 	  }
   }//title: string, html: string
+
+
+export default function MakePost(test: Post) {
   
-export default function MakePost() {
-	const [posts, setPosts] = useState<Array<Post>>()
+  const [posts, setPosts] = useState<Array<Post>>()
 
   
-  
-  
+  if(posts!==undefined){
+    mainFeaturedPost=posts[2]
+  }
+
   async function setupPosts() {
 	const newPosts = await getStaticProps()
 	setPosts(newPosts.props.posts)
@@ -98,27 +78,46 @@ export default function MakePost() {
   
   }, []);
 	
-  if (posts !== undefined){
-  mainFeaturedPost=posts[1]
-  console.log(mainFeaturedPost)
-  }
-  
-  if(posts!==undefined){
-  featuredPosts[0]=posts[0]
-  featuredPosts[1]=posts[2]
-  featuredPosts[2]=posts[3]
-  featuredPosts[3]=posts[4]
-  featuredPosts[4]=posts[5]
-  featuredPosts[5]=posts[6]
-  
-  }
+
 
 	return (
-		<div>
-			<h1>{mainFeaturedPost.title}</h1>
-			<div dangerouslySetInnerHTML={{ __html: featuredPosts[5].html}}></div>
 
-			<div id="disqus_thread"></div>
+		<div className="viewport">
+		  <div className="viewport-top">
+			 <main className="site-main">
+				<article className="content">
+					{ mainFeaturedPost.feature_image ?
+						<figure className="post-feature-image">
+							<img src={ mainFeaturedPost.feature_image } alt={ mainFeaturedPost.title } />
+						</figure> : null }
+					<section className="post-full-content">
+						<h1 className="content-title">{mainFeaturedPost.title}</h1>
+
+						{/* The main post content */ }
+						<div
+							className="content-body load-external-scripts"
+							dangerouslySetInnerHTML={{ __html: mainFeaturedPost.html }}
+						/>
+				    </section>
+				</article>
+
+		  	 </main>
+
+			</div>
+
+
+				<div className="viewport-bottom">
+                    {/* The footer at the very bottom of the screen */}
+                    <footer className="site-foot">
+                        <div className="site-foot-nav container">
+                            <div className="site-foot-nav-left">
+                                <Link to="/">{mainFeaturedPost.title}</Link> © 2021  <a className="site-foot-nav-item" href="https://li.finance" target="_blank" rel="noopener noreferrer">Li Finance</a>
+                            </div>
+                        </div>
+                    </footer>
+
+                </div>
 		</div>
+
 	)
 }

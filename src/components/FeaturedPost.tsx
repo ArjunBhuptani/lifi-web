@@ -6,53 +6,52 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link, Route } from 'react-router-dom';
-import MakePost from './post/MakePost';
 
-interface FeaturedPostProps {
-  post: {
-    created_at: string;
-    description: string;
-    excerpt: string;
-    html: string;
-    title: string;
-    feature_image: string;
-    slug: string;
-  };
+
+
+interface Post  {
+  created_at: string;
+  description: string;
+  excerpt: string;
+  html: string;
+  title: string;
+  feature_image: string;
+  slug: string;
 }
 
-export default function FeaturedPost(props: FeaturedPostProps ) {
-  const { post } = props;
+export default function FeaturedPost( test: Post ) {
+
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href={"/post/"+post.slug}>
-      <Route path="/post/write"  component={MakePost}/> 
-      <div onClick={() =>  <Link to="/post/write"></Link> }>
-        <Card sx={{ display: 'flex' }}>
-          <CardContent sx={{ flex: 1 }}>
-            <Typography component="h2" variant="h5">
-              {post.title}
-            </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              {post.created_at.substring(0,10)}
-            </Typography>
-            <Typography variant="subtitle1" paragraph>
-              {post.excerpt}
-            </Typography>
-            <Typography variant="subtitle1" color="primary">
-              Continue reading...
-            </Typography>
-            <Link to={"/post/write"}>  </Link>  
-          </CardContent>
-          <CardMedia
-            component="img"
-            sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
-            image={post.feature_image}
-            alt={post.excerpt}
-          />
-         
-       </Card>
-       </div>
+      <CardActionArea component="a" href={"/post/write"}>
+        <Route path="/blog/write" />  
+          <div onClick={() =>  <Link to="/post/write">  </Link>  }>
+            <Card sx={{ display: 'flex' }}>
+              <CardContent sx={{ flex: 1 }}>
+                <Typography component="h2" variant="h5">
+                  {test.title}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary">
+                  {test.created_at.substring(0,10)}
+                </Typography>
+                <Typography variant="subtitle1" paragraph>
+                  {test.excerpt}
+                </Typography>
+                <Typography variant="subtitle1" color="primary">
+                  Continue reading...
+                </Typography>
+                <Link to={"/post/write"}>  </Link>  
+              </CardContent>
+              <CardMedia
+                component="img"
+                sx={{ width: 260, display: { xs: 'none', sm: 'block' } }}
+                image={test.feature_image}
+                alt={test.excerpt}
+              />
+            
+          </Card>
+          </div>
       </CardActionArea>
     </Grid>
   );
