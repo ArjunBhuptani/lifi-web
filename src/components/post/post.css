@@ -1007,23 +1007,7 @@ h6 {
     justify-content: space-between;
 }
 
-.site-foot-nav a {
-    color: rgba(255,255,255,0.7);
-}
 
-.site-foot-nav a:hover {
-    text-decoration: none;
-    color: rgba(255,255,255,1);
-}
-
-.site-foot-nav-right a {
-    display: inline-block;
-    padding: 2px 5px;
-}
-
-.site-foot-nav-right a:last-child {
-    padding-right: 0;
-}
 
 
 /* Koenig Styles

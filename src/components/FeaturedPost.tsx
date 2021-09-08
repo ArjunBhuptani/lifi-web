@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import { Link, Route } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 
@@ -20,14 +20,20 @@ interface Post  {
 }
 
 export default function FeaturedPost( test: Post ) {
+  const history = useHistory();
+
+  
+  const goToProject = () =>    
+   history.push({
+      pathname: "/post/" + test.slug,
+      state:  test 
+    })
 
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href={"/post/write"}>
-        <Route path="/blog/write" />  
-          <div onClick={() =>  <Link to="/post/write">  </Link>  }>
-            <Card sx={{ display: 'flex' }}>
+      <CardActionArea onClick={goToProject}  >
+            <Card sx={{ display: 'flex' }}  style={{backgroundColor: "#d4d5d6"}}  >   
               <CardContent sx={{ flex: 1 }}>
                 <Typography component="h2" variant="h5">
                   {test.title}
@@ -48,10 +54,8 @@ export default function FeaturedPost( test: Post ) {
                 sx={{ width: 260, display: { xs: 'none', sm: 'block' } }}
                 image={test.feature_image}
                 alt={test.excerpt}
-              />
-            
+              />            
           </Card>
-          </div>
       </CardActionArea>
     </Grid>
   );
