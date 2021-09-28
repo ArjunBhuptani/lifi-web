@@ -34,9 +34,6 @@
 
 .ant-layout-header {
   overflow: hidden;
-}
-
-.ant-menu.ant-menu-horizontal {
   background: rgb(24,21,35);
   background: linear-gradient(140deg, rgba(24,21,35,1) 0%, rgba(9,9,121,1) 93%, rgba(9,9,121,1) 100%);
   border: none;
@@ -45,6 +42,11 @@
 .ant-menu-horizontal > .ant-menu-item a,
 .ant-menu-horizontal > .ant-menu-item-selected a {
   color: white;
+}
+
+.ant-menu{
+  background: transparent !important;
+  border:none !important;
 }
 
 .beta-badge {
@@ -73,12 +75,11 @@
   color: #c53030;
   border: 1px solid #c53030;
   background: white;
-  position: absolute;
-  top: 14px;
-  right: 14px;
   line-height: 1;
   padding: 10px;
   border-radius: 6px;
+  margin-right:30px;
+  margin-left:30px;
 }
 
 .lifiSupport:hover {
